@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de création - WFCamp
+{% endblock %}
+
+{% block body %}
+	<h1>Création de posts</h1>
+
+	<div>
+		{{ form_start(form) }}
+		{{ form_row(form.content, {'attr': {'class': 'border-4'}}) }}
+		<button type="submit">{{ action }}</button>
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}
