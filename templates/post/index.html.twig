@@ -7,7 +7,7 @@
 	<h1>Liste des posts</h1>
 
 	{% for post in posts %}
-	<div class="border border-danger my-3 flex">
+	<div class="border my-3 p-3 bg-light shadow">
 		<h3>{{ post.content }}</h3>
 		<p>
 			<small>
@@ -15,7 +15,18 @@
 				{{ post.createdAt | date('d/m/Y à H:i:s') }}
 			</small>
 		</p>
-		<a class="btn btn-secondary rounded" href={{ path('app_post_details', {'id':post.id} ) }}>Details</a>
+		<div class="d-flex gap-2">
+			<a class="btn btn-primary rounded" href={{ path('app_post_details', {'id':post.id} ) }}>
+				<i class="far fa-comment-dots"></i>
+			</a>
+			<form method="post" action={{ path('app_post_delete', {'id':post.id} ) }}>
+				<input type="hidden" name="_token" value={{csrf_token('delete' ~ post.id)}}>
+
+				<button class="btn btn-danger rounded" type="submit">
+					<i class="far fa-trash-alt"></i> 😭
+				</button>
+			</form>
+		</div>
 	</div>
 	{% endfor %}
 {% endblock %}
